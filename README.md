@@ -10,11 +10,16 @@ ORM이란 무엇일까요? ORM(Object-Relational Mapping)에 약자입니다.
 즉, ORM은 자바스크립트 객체와 관계형 데이터베이스를 서로 연결해주는 도구입니다.
 
 ## - 설치
-sequelize와 sequelize-cli 그리고 mssql를 설치해주세요. (저는 SQL Server 데이터베이스에서 사용을 해봤습니다.)
+ - 프로젝트 디렉터리를 만들고 이동
+```
+mkdir node-sequelize
+cd node-sequelize
+```
+ - sequelize와 sequelize-cli 그리고 mssql를 설치해주세요. ([SQL Server docker image(1.5GB)](https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-linux-ver15&preserve-view=true&pivots=cs1-bash#pullandrun2019)를 내려받아 사용)
 ```
 npm install sequelize sequelize-cli tedious
 ```
-설치를 완료 후 sequelize init 명령어를 실행합니다.
+ - 설치를 완료 후 sequelize init 명령어를 실행합니다.
 ```
 sequelize init
 ```
@@ -22,15 +27,16 @@ sequelize init
 
  - config
 
+>>기본은 mysql로 나오는데 dialect 부분과 username, password, database, host를 자신의 환경에 맞게 수정합니다
 **config/config.json**
 ```
 {
   "development": {
     "username": "sa", //DB와 연결할 유저 "이름"
-    "password": "infinov1*", //DB와 연결할 유저 "비밀번호"
+    "password": "********", //DB와 연결할 유저 "비밀번호"
     "database": "met_db", //사용할 Database 이름
     "host": "127.0.0.1", //DB 서버 호스트
-    "dialect": "mssql" //DB 타입 설정 (mssql이 아니면 다른 DB 설정)
+    "dialect": "mssql" //DB 타입 설정 (mysql이 아니면 다른 DB 설정)
   },
   "test": {
     "username": "root",
@@ -104,8 +110,9 @@ module.exports = db;
 
 ## - DB 생성
 sequelize에서 DB를 생성하는 방법은 터미널에 명령어를 통해 사용 가능합니다.
-
+```
 sequelize db:create
+```
 위 명령어를 통해 config/config.json 파일을 읽은 후, develpment 모드에 작성되어 있는 met_db DB가 생성이 됩니다.
 
 - Model 생성
@@ -156,7 +163,7 @@ module.exports = (sequelize, DataTypes) => {
 
  - 프로젝트 루트에 실행 파일 작성
 
-**~/server.js**
+**server.js**
 ```
 const { sequelize } = require('./models');
 
