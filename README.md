@@ -180,3 +180,6 @@ server.js 파일, 즉, "서버를 실행하는 파일"에 해당 소스코드를
 ```
 node server.js
 ```
+
+## - Ref
+[[Node.js] Sequelize 개념 및 설치](https://any-ting.tistory.com/49)
